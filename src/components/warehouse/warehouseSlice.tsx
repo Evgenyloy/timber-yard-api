@@ -1,14 +1,14 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { IData } from '../../types/types';
-import { createAppAsyncThunk } from '../../types/types';
-import { RootState } from '../../types/types';
-import { filterItems } from '../../utils/utils';
-import { useHttp } from '../../hooks/http.hook';
-import { json2 } from '../../data';
+import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { IData } from "../../types/types";
+import { createAppAsyncThunk } from "../../types/types";
+import { RootState } from "../../types/types";
+import { filterItems } from "../../utils/utils";
+import { useHttp } from "../../hooks/http.hook";
+import { json3 } from "../../data";
 
-export const fetchData = createAppAsyncThunk<IData[]>('data/fetchData', () => {
+export const fetchData = createAppAsyncThunk<IData[]>("data/fetchData", () => {
   const { request } = useHttp();
-  return request(json2);
+  return request(json3);
 });
 
 export const filteredWarehouseSelector = createSelector(
@@ -19,7 +19,7 @@ export const filteredWarehouseSelector = createSelector(
   ],
   (data, filter, search) => {
     return filterItems(data, filter, search);
-  }
+  },
 );
 
 interface IInitialState {
@@ -29,23 +29,23 @@ interface IInitialState {
 
 const initialState: IInitialState = {
   data: [],
-  dataLoadingStatus: 'idle',
+  dataLoadingStatus: "idle",
 };
 
 const slice = createSlice({
-  name: 'warehouse',
+  name: "warehouse",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchData.pending, (state) => {
-      state.dataLoadingStatus = 'loading';
+      state.dataLoadingStatus = "loading";
     });
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      state.dataLoadingStatus = 'idle';
+      state.dataLoadingStatus = "idle";
       state.data = action.payload;
     });
     builder.addCase(fetchData.rejected, (state) => {
-      state.dataLoadingStatus = 'error';
+      state.dataLoadingStatus = "error";
     });
   },
 });
