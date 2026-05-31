@@ -1,6 +1,6 @@
-import './FilterAndSearch.scss';
-import Filter from '../filter/Filter';
-import Search from '../search/Search';
+import "./filterAndSearch.scss";
+import Filter from "../filter/Filter";
+import Search from "../search/Search";
 
 function FilterAndSearch() {
   return (
